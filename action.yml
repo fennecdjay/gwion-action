@@ -1,0 +1,22 @@
+name: 'Gwion action'
+description: 'use Gwion within github actions'
+author: 'Jérémie Astor<astor.jeremie@wanadoo.fr>'
+
+inputs:
+  dir:
+    description: 'path to build gwion in'
+    default: 'Gwion'
+  ref:
+    description: 'sha or branch to checkout'
+    default: 'master'
+  run:
+    description: 'wether or not to run the test suite'
+    default: 'false'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'music'  
+  color: 'green'
