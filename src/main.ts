@@ -10,7 +10,7 @@ class GitShDirRunner {
 
   // exec the command in ${ dir }
   async exec(cmd: string): Promise<void> {
-    await exec.exec(`sh -c \"cd ${this.dir} && ${ cmd }\"`)
+    await exec.exec(`sh -c "cd ${this.dir} && ${ cmd }"`)
   }
 
 }
@@ -21,7 +21,7 @@ async function run(): Promise<void> {
     // get inputs
     const dir = core.getInput('dir', { required: true });
     const ref = core.getInput('ref', { required: true });
-    const run = core.getInput('run', { required: true });
+    const dorun = core.getInput('run', { required: true });
 
     // clone repo
     await exec.exec(`git clone https://github.com/fennecdjay/Gwion ${ dir }`);
@@ -31,7 +31,7 @@ async function run(): Promise<void> {
     await gsdr.exec(`git checkout ${ ref }`);
     await gsdr.exec(`git submodule update --init ast util`)
     await gsdr.exec('make')
-    if(run === 'true')
+    if(dorun === 'true')
       await gsdr.exec('make test')
 
     // add gwion to path
